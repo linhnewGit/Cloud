@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Product = require("../models/products");
 const multer = require("multer");
+const products = require("../models/products");
 
 var storage = multer.diskStorage({
     destination: function(req, file, cb){
@@ -37,7 +38,16 @@ router.post("/add", upload, (req, res) =>{
 });
 
 router.get("/", (req, res) => {
-    res.render("index", { title: "Home page "});
+    Product.find().exec((err, products) => {
+        if(err){
+            res.json({ message: err.message });
+        } else {
+            res.render("index",{
+                title: "Home page",
+                products: products,
+            });
+        }
+    });
 });
 router.get("/add", (req, res) => {
     res.render("add_product", { title: "Add product "});
