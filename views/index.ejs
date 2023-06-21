@@ -13,7 +13,7 @@
             <% } %>
             <div class="table-responsive">
                 <% if (products != '') { %>
-                    <table class="table table-striped text-center">
+                    <table class="table table-striped text-center my-3">
                         <thead>
                             <tr class="table-dark">
                                 <th>ID</th>
@@ -21,7 +21,7 @@
                                 <th>Name</th>
                                 <th>Price</th>
                                 <th>Quantity</th>
-                                <th>Action</th>
+                                <th>Todo</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,6 +34,7 @@
                                     <td><%= row.quantity %></td>
                                     <td>
                                         <a href="/edit/<%= row.id %>" class="text-success"><i class="fas fa-edit fa-lg mx-1"></i></a>
+                                        
                                         <a href="/delete/<%= row.id %>" class="text-danger"><i class="fas fa-trash fa-lg mx-1"></i></a>
                                     </td>
                                 </tr>
