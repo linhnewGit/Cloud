@@ -6,7 +6,12 @@ const session = require('express-session');
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+//mongodb+srv://<username>:<password>@cluster0.ec7tlcg.mongodb.net/
+main().catch(err => console.log(err));
+
+async function main() {
+  await mongoose.connect('mongodb+srv://admin:NzkbuIv2mKW9hLIc@cluster0.ec7tlcg.mongodb.net/?retryWrites=true&w=majority');
+}
 const db = mongoose.connection;
 db.on("error", (error) => console.log(error));
 db.once("open", () => console.log("Database connected!"));
@@ -15,7 +20,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
 app.use(session({
-    secret: "my secret",
+    secret: "secret",
     saveUninitialized: true,
     resave: false,
 }));
